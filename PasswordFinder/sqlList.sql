@@ -8,3 +8,5 @@ create table Info (
 	ID varchar(128),
 	Pswd varchar(128)
 );
+
+insert into member (ID, PSWD) values('1234', '1234');

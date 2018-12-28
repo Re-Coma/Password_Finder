@@ -11,11 +11,19 @@ using System.Data.SQLite;
 
 namespace PasswordFinder
 {
-    public partial class Form1 : Form
+    public partial class LoginForm : Form
     {
-        public Form1()
+        string ID = ""; string Pswd = "";
+
+        public LoginForm()
         {
             InitializeComponent();
+        }
+
+        //나가기 버튼
+        private void ExitBtn_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }
