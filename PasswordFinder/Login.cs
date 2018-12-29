@@ -17,8 +17,7 @@ namespace PasswordFinder
         public readonly string FirstPswd = "1234"; //초기 패스워드
         private string ID = ""; //현재 아이디
         private string Pswd = ""; //현재 패스워드
-
-        
+       
 
         //Login 클래스 생성과 동시에 아이디와 패스워드 설정
         public Login()
@@ -46,7 +45,7 @@ namespace PasswordFinder
                  * sqlList.sql를 이용해서 테이블 생성과 동시에
                  * 초기비밀번호 입력
                 */
-                cmd.CommandText = ".read sqlList.sql";
+                cmd.CommandText = @".read sqlList.sql";
                 cmd.ExecuteNonQuery();
 
                 //아이디와 패스워드를 초기 아이디/패스워드로 설정
@@ -72,22 +71,52 @@ namespace PasswordFinder
                 //데이터가 존재하는 경우
                 if(Reader.Read())
                 {
+                    //DB로부터 추출받은 정보를 입력
                     ID = Reader["ID"] as string;
                     Pswd = Reader["PSWD"] as string;
+                    //끝
+                    Reader.Dispose(); cmd.Dispose();  sql.Close(); sql.Dispose();
+                    return;
+                    
                 }
                 else //데이터가 존재하지 않는 경우(비상시)
                 {
+                    Reader.Dispose();
+
                     //데이터를 삭제할건지 묻는다.
-                    DialogResult Delete = MessageBox.Show("데이터베이스가 손상되었습니다 \n 예를 누르면 데이터가 초기화되고 아니오를 누르면 초기아이디와 비밀번호로 복구됩니다.",
+                    DialogResult Delete = MessageBox.Show("로그인관련 데이터베이스가 손상되었습니다 \n 예를 누르면 데이터가 초기화되고 아니오를 누르면 초기아이디와 비밀번호로 복구됩니다.",
                         "DATA ERROR", MessageBoxButtons.YesNo, MessageBoxIcon.Error);
+
+                    if(Delete == DialogResult.Yes) //예를 눌렀을 경우
+                    {
+                        File.Delete("List.db");
+                        MessageBox.Show("데이터베이스를 초기화했습니다. \n 프로그램을 종료합니다.",
+                            "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        cmd.Dispose(); sql.Close(); sql.Dispose();
+                        Application.Exit(); //프로그램 종료
+                    }
+                    else //아니오를 눌렀을 경우
+                    {
+                        //DB에 초기비밀번호 입력                        
+                        cmd.CommandText = "insert into member (ID, PSWD) values('1234', '1234')";
+                        cmd.ExecuteNonQuery();
+                        cmd.CommandText = "commit";
+                        cmd.ExecuteNonQuery();
+                        cmd.Dispose(); sql.Close(); sql.Dispose();
+
+                        //아이디 1234 패스워드 1234
+                        ID = FirstID; Pswd = FirstPswd;
+
+                        //복구 완료 확인창
+                        MessageBox.Show("복구가 완료되었습니다.", "COMPLETE", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        return;
+                    }
                     
                 }
                 
 
             }
         }
-
-
         
     }
 }

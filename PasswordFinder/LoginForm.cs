@@ -14,9 +14,10 @@ namespace PasswordFinder
     public partial class LoginForm : Form
     {
         string ID = ""; string Pswd = "";
-
+        Login start = null;
         public LoginForm()
         {
+            start = new Login(); //로그인을 위한 세팅 시작
             InitializeComponent();
         }
 
