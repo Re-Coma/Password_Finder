@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 namespace PasswordFinder
 {
-    //초기 세팅 클래스
+    //로그인 관련 클래스
     public class Login
     {
         //초기 비밀번호
@@ -18,7 +18,7 @@ namespace PasswordFinder
         private string ID = ""; //현재 아이디
         private string Pswd = ""; //현재 패스워드
        
-
+       
         //Login 클래스 생성과 동시에 아이디와 패스워드 설정
         public Login()
         {
@@ -45,7 +45,14 @@ namespace PasswordFinder
                  * sqlList.sql를 이용해서 테이블 생성과 동시에
                  * 초기비밀번호 입력
                 */
-                cmd.CommandText = @".read sqlList.sql";
+
+                //sql읽기
+                string FirstCommand = "";
+                StreamReader ReadSQL = new StreamReader("sqlList.sql");
+                FirstCommand = ReadSQL.ReadToEnd();
+                ReadSQL.Close(); ReadSQL.Dispose();
+
+                cmd.CommandText = FirstCommand;
                 cmd.ExecuteNonQuery();
 
                 //아이디와 패스워드를 초기 아이디/패스워드로 설정
@@ -113,10 +120,16 @@ namespace PasswordFinder
                     }
                     
                 }
-                
 
             }
         }
-        
+        public string GetID() => ID;
+        public string GetPswd() => Pswd;
+        public void SetLogin(string ID, string Pswd)
+        {
+            this.ID = ID;
+            this.Pswd = Pswd;
+        }
+
     }
 }

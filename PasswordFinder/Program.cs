@@ -16,7 +16,17 @@ namespace PasswordFinder
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new LoginForm());
+
+            LoginForm loginform = new LoginForm();
+            Application.Run(loginform);
+            bool myPass = loginform.pass;
+
+            if(myPass)
+            {
+                MainForm mForm = new MainForm(loginform.start);
+                loginform.Dispose();
+                Application.Run(mForm);
+            }
         }
     }
 }
