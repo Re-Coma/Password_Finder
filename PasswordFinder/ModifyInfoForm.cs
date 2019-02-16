@@ -46,7 +46,7 @@ namespace PasswordFinder
                     {
                         //재설정 모드로 전환
                         MainText.Text = "아이디, 비밀번호 재설정";
-                        CommentText.Text = "신원이 학인되었습니다. 재설정이 가능합니다.";
+                        CommentText.Text = "신원이 확인되었습니다. 재설정이 가능합니다.";
                         idBox.Text = "";
                         pswdBox.Text = "";
 

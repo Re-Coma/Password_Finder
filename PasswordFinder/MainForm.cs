@@ -19,6 +19,8 @@ namespace PasswordFinder
         SQLiteConnection conn = new SQLiteConnection("Data Source = List.db; Version=3;");
         DataManager dataManager = null; //데이터 관리를 위한 자작 클래스 DataManager 선언
 
+        
+
         public MainForm(Login userInfo)
         {
             this.userInfo = userInfo;
@@ -37,6 +39,7 @@ namespace PasswordFinder
 
                 DataView.Items.Add(newItem);
             }
+
             //끝
         }
 
@@ -161,6 +164,20 @@ namespace PasswordFinder
         {
             AboutForm aForm = new AboutForm();
             aForm.ShowDialog();
+        }
+
+        //아이디 복사
+        private void copyId_Click(object sender, EventArgs e)
+        {            
+            string copyID = DataView.SelectedItems[0].SubItems[1].Text;
+            Clipboard.SetData(DataFormats.Text, copyID);
+        }
+
+        //패스워드 복사
+        private void copyPaswd_Click(object sender, EventArgs e)
+        {
+            string copyPswd = DataView.SelectedItems[0].SubItems[2].Text;
+            Clipboard.SetData(DataFormats.Text, copyPswd);
         }
     }
 }

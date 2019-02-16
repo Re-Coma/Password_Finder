@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.menuStrip = new System.Windows.Forms.MenuStrip();
             this.DataStripMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.InputDataStrip = new System.Windows.Forms.ToolStripMenuItem();
@@ -41,7 +42,13 @@
             this.Site = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.ID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Pswd = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.selectMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.copyId = new System.Windows.Forms.ToolStripMenuItem();
+            this.copyPaswd = new System.Windows.Forms.ToolStripMenuItem();
+            this.deleteStrip = new System.Windows.Forms.ToolStripMenuItem();
+            this.reviveStrip = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
+            this.selectMenu.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip
@@ -113,7 +120,7 @@
             // AboutStrip
             // 
             this.AboutStrip.Name = "AboutStrip";
-            this.AboutStrip.Size = new System.Drawing.Size(180, 22);
+            this.AboutStrip.Size = new System.Drawing.Size(113, 22);
             this.AboutStrip.Text = "About..";
             this.AboutStrip.Click += new System.EventHandler(this.AboutStrip_Click);
             // 
@@ -123,6 +130,7 @@
             this.Site,
             this.ID,
             this.Pswd});
+            this.DataView.ContextMenuStrip = this.selectMenu;
             this.DataView.Location = new System.Drawing.Point(12, 27);
             this.DataView.MultiSelect = false;
             this.DataView.Name = "DataView";
@@ -146,6 +154,44 @@
             this.Pswd.Text = "Password";
             this.Pswd.Width = 163;
             // 
+            // selectMenu
+            // 
+            this.selectMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.copyId,
+            this.copyPaswd,
+            this.deleteStrip,
+            this.reviveStrip});
+            this.selectMenu.Name = "selectMenu";
+            this.selectMenu.Size = new System.Drawing.Size(181, 114);
+            // 
+            // copyId
+            // 
+            this.copyId.Name = "copyId";
+            this.copyId.Size = new System.Drawing.Size(150, 22);
+            this.copyId.Text = "아이디 복사";
+            this.copyId.Click += new System.EventHandler(this.copyId_Click);
+            // 
+            // copyPaswd
+            // 
+            this.copyPaswd.Name = "copyPaswd";
+            this.copyPaswd.Size = new System.Drawing.Size(180, 22);
+            this.copyPaswd.Text = "패스워드 복사";
+            this.copyPaswd.Click += new System.EventHandler(this.copyPaswd_Click);
+            // 
+            // deleteStrip
+            // 
+            this.deleteStrip.Name = "deleteStrip";
+            this.deleteStrip.Size = new System.Drawing.Size(180, 22);
+            this.deleteStrip.Text = "제거";
+            this.deleteStrip.Click += new System.EventHandler(this.DeleteDataStrip_Click);
+            // 
+            // reviveStrip
+            // 
+            this.reviveStrip.Name = "reviveStrip";
+            this.reviveStrip.Size = new System.Drawing.Size(180, 22);
+            this.reviveStrip.Text = "수정";
+            this.reviveStrip.Click += new System.EventHandler(this.ModifyInfo_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
@@ -161,6 +207,7 @@
             this.Text = "PasswordFinder";
             this.menuStrip.ResumeLayout(false);
             this.menuStrip.PerformLayout();
+            this.selectMenu.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -181,5 +228,10 @@
         private System.Windows.Forms.ColumnHeader Site;
         private System.Windows.Forms.ColumnHeader ID;
         private System.Windows.Forms.ColumnHeader Pswd;
+        private System.Windows.Forms.ContextMenuStrip selectMenu;
+        private System.Windows.Forms.ToolStripMenuItem copyId;
+        private System.Windows.Forms.ToolStripMenuItem copyPaswd;
+        private System.Windows.Forms.ToolStripMenuItem deleteStrip;
+        private System.Windows.Forms.ToolStripMenuItem reviveStrip;
     }
 }
